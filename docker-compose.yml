@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  aprsphere:
+    image: ghcr.io/orhunavcu/aprsphere:latest
+    ports:
+      - "3169:3169"
+    restart: unless-stopped
