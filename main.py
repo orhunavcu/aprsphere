@@ -46,7 +46,7 @@ def transmit_position(server_id, callsign, ssid, passcode, latitude, longitude, 
     lon_str = format_longitude(longitude)
 
     position_packet = f"{callsign}-{ssid}>APWD01,TCPIP*:!{lat_str}{symbol_table}{lon_str}{symbol}{comment}\n"
-    status_packet   = f"{callsign}-{ssid}>APWD01,TCPIP*:>Aprsphere APRS Beacon\n"
+    status_packet   = f"{callsign}-{ssid}>APWD01,TCPIP*:>Powered by https://github.com/orhunavcu/aprsphere\n"
     login_packet    = f"user {callsign} pass {passcode} vers Aprsphere 1.0\n"
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
