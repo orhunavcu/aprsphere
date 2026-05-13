@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aprsphere</title>
+<title>APRSPHERE</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
@@ -14,7 +14,7 @@
     --border:     #1a2a1a;
     --green:      #00ff41;
     --green-dim:  #00a829;
-    --green-glow: #00ff4133;
+    --green-glow: #31f06133;
     --amber:      #ffb300;
     --red:        #ff3c3c;
     --text:       #d4e8d4;
@@ -54,9 +54,18 @@
   .title-block p { font-size: 0.68rem; color: var(--muted); letter-spacing: 2px; }
   #lang-btn {
     position: absolute; right: 0; top: 50%; transform: translateY(-50%);
-    font-family: 'Orbitron', sans-serif; font-size: 0.65rem; letter-spacing: 2px;
+    font-family: 'Orbitron', sans-serif; 
+    font-size: 0.75rem; /* Genel metin boyutu */
+    letter-spacing: 2px;
     padding: 0.45rem 1rem; border: 1px solid var(--green-dim); color: var(--green-dim);
     background: transparent; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; gap: 8px; /* Emoji ve metin arası boşluk */
+  }
+
+
+  #lang-btn::first-letter {
+    font-size: 1.3rem; 
+    vertical-align: middle;
   }
   #lang-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-glow); }
 
@@ -119,12 +128,13 @@
   .sym-active-preview canvas { image-rendering:pixelated; }
   .sym-active-preview span { color:var(--green); font-size:0.95rem; }
   .symbol-grid { display:grid; grid-template-columns:repeat(10,1fr); gap:0.4rem; margin-top:0.5rem; }
-  .sym-btn { background:#0a100a; border:1px solid var(--border); cursor:pointer; text-align:center; transition:all 0.15s; display:flex; flex-direction:column; align-items:center; gap:4px; padding:0.35rem 0.2rem; }
-  .sym-btn:hover { border-color:var(--green-dim); }
-  .sym-btn.selected { border-color:var(--green); background:var(--green-glow); box-shadow:0 0 6px var(--green-glow); }
-  .sym-btn canvas { image-rendering:pixelated; display:block; }
-  .sym-btn .slabel { color:#8ab88a; font-size:0.62rem; font-family:'Share Tech Mono',monospace; line-height:1.3; }
-  .sym-btn.selected .slabel { color:var(--green); }
+  .sym-btn { background:#161c23; border:1px solid var(--border); cursor:pointer; text-align:center; transition:all 0.2s ease; display:flex; flex-direction:column; align-items:center; gap:5px; padding:0.4rem 0.2rem; border-radius:0; position:relative; overflow:hidden; }
+  .sym-btn:hover { border-color:var(--green-dim); background:#1e2630; transform:translateY(-1px); box-shadow:0 2px 4px rgba(0,0,0,0.3); }
+  .sym-btn.selected { border-color:var(--green); background:rgba(0,255,65,0.08); box-shadow:0 0 10px var(--green-glow), inset 0 0 5px rgba(0,255,65,0.1); }
+  .sym-btn canvas { image-rendering:pixelated; display:block; filter:drop-shadow(0 1px 2px rgba(0,0,0,0.5)); transition:transform 0.2s; }
+  .sym-btn:hover canvas { transform:scale(1.1); }
+  .sym-btn .slabel { color:var(--label); font-size:0.6rem; font-family:'Share Tech Mono',monospace; line-height:1.2; opacity:0.8; }
+  .sym-btn.selected .slabel { color:var(--green); opacity:1; font-weight:bold; }
 
   /* BUTTONS */
   .btn-row { display:flex; gap:1rem; width:100%; max-width:860px; }
@@ -145,18 +155,27 @@
   #toast.show { opacity:1; transform:translateY(0); }
   footer { color:#6a8a6a; font-size:0.72rem; letter-spacing:2px; margin-top:1.5rem; padding-bottom:1rem; text-align:center; }
   @media(max-width:600px){ .grid-2,.grid-3{grid-template-columns:1fr;} .sym-row{grid-template-columns:1fr;} .symbol-grid{grid-template-columns:repeat(6,1fr);} }
+
+  /* DONATE */
+  .donate-wrap{width:100%;max-width:860px;display:flex;justify-content:center;margin-top:1rem;margin-bottom:0.5rem;}
+  .btn-donate{font-family:'Orbitron',sans-serif;font-size:0.75rem;letter-spacing:2px;padding:0.6rem 2rem;border:1px solid #0070ba;background:transparent;color:#0070ba;text-decoration:none;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:10px;border-radius:0;width:100%;}
+  .btn-donate:hover{background:rgba(0,112,186,0.1);border-color:#009cde;color:#009cde;box-shadow:0 0 12px rgba(0,112,186,0.2);}
+  .btn-donate svg{fill:currentColor;width:16px;height:16px;}
+
+  /*FOOTER */
+  footer { color:#ffb300; font-size:0.72rem; letter-spacing:2px; margin-top:1.5rem; padding-bottom:1rem; text-align:center; opacity:0.8; text-shadow:0 0 5px rgba(0,242,255,0.2); }
+
 </style>
 </head>
 <body>
-
+ 
 <header>
-  <div class="logo-wrap"><img src="/static/icon.png" alt="Icon"></div>
+  <div class="logo-wrap"><img src="/static/icon.png" alt=""></div>
   <div class="title-block">
     <h1>APRSPHERE</h1>
     <p id="hdr-sub">PACKET RADIO BEACON // APRS POSITION TRANSMITTER</p>
   </div>
-  <!-- Türkçe aktif → EN'e geçiş butonu göster -->
-  <button id="lang-btn" onclick="toggleLang()">🌐 EN</button>
+  <button id="lang-btn" onclick="toggleLang()"><span style="font-size: 1.4rem; vertical-align: middle;">🇹🇷</span> TR</button>
 </header>
 
 <div class="status-bar">
@@ -227,8 +246,8 @@
     <div class="field">
       <label id="t-symtable">Sembol Tablosu</label>
       <select id="symbol_table" onchange="rebuildSymGrid()">
-        <option value="/">/ — Birincil tablo</option>
-        <option value="\"">\ — İkincil tablo</option>
+        <option value="/">/ — Birincil Tablo</option>
+        <option value="\"">\ — İkincil Tablo</option>
       </select>
     </div>
     <div class="field">
@@ -251,7 +270,7 @@
   <div class="section-title" id="t-timing">▸ YORUM VE ZAMANLAMA</div>
   <div class="field" style="margin-bottom:1.5rem;">
     <label id="t-comment">Yorum (Comment)</label>
-    <input id="comment" type="text" placeholder="Aprsphere Beacon" maxlength="43">
+    <input id="comment" type="text" placeholder="APRSPHERE BEACON" maxlength="43">
   </div>
   <div class="field">
     <label>
@@ -276,7 +295,7 @@
 <!-- LOG -->
 <div class="panel">
   <div class="section-title" id="t-terminal">▸ TERMINAL</div>
-  <div id="log-box"><span class="log-inf log-line" id="init-log">&gt; Aprsphere hazır. Yapılandırın ve başlatın.</span></div>
+  <div id="log-box"><span class="log-inf log-line" id="init-log">&gt; APRSPHERE hazır. Yapılandırın ve başlatın.</span></div>
 </div>
 
 <div class="btn-row">
@@ -284,18 +303,23 @@
   <button class="btn btn-start" id="btn-start" onclick="startService()"><span>▶</span><span id="t-start">BAŞLAT</span></button>
   <button class="btn btn-stop" id="btn-stop" onclick="stopService()" style="display:none"><span>⏹</span><span id="t-stop">DURDUR</span></button>
 </div>
+<div class="donate-wrap">
+  <a href="https://www.paypal.com/donate/?hosted_button_id=8QN5GXRJR7G8W" target="_blank" class="btn-donate">
+    <svg viewBox="0 0 24 24"><path d="M20.067 8.478c.492.88.556 2.014.307 3.327-.278 1.458-.923 2.591-1.933 3.398-1.01.808-2.358 1.212-4.043 1.212h-1.604c-.378 0-.693.26-.763.63l-.744 3.974c-.035.187-.2.321-.39.321H7.81c-.244 0-.422-.224-.378-.464l2.544-13.6c.035-.187.2-.321.39-.321h4.945c1.685 0 2.915.347 3.69 1.042.775.694 1.13 1.523 1.066 2.481zM14.73 11.238c0-.23-.053-.418-.16-.563-.106-.145-.29-.217-.551-.217h-1.428l-.45 2.4h1.092c.504 0 .866-.141 1.086-.423.22-.282.31-.683.31-1.201z"/></svg>
+    <span id="t-donate">DONATE WITH PAYPAL</span>
+  </a>
+</div>
 
-<footer>APRSPHERE | Developed by Orhun Avcu | ghcr.io/orhunavcu/aprsphere</footer>
+<footer>APRSPHERE | Developed by Orhun Avcu | ghcr.io/orhunavcu/aprsphere | MIT Licence</footer>
 <div id="toast"></div>
 
 <script>
 // ── LANGUAGE ──
-// currentLang = the ACTIVE language. Button shows the OTHER language (switch target).
 let currentLang = 'tr';
 
 const STRINGS = {
   tr: {
-    'lang-btn':    '🌐 EN',
+    'lang-btn': '<span style="font-size: 1.4rem; vertical-align: middle; margin-right: 4px;">🇹🇷</span> TR',
     'hdr-sub':     'PACKET RADIO BEACON // APRS KONUM YAYINCISI',
     't-station':   '▸ İSTASYON BİLGİLERİ',
     't-callsign':  'Çağrı İşareti',
@@ -321,7 +345,7 @@ const STRINGS = {
     'status-standby':  'STANDBY',
     'symtable-p': '/ — Birincil tablo',
     'symtable-s': '\\ — İkincil tablo',
-    'log-init': '> Aprsphere hazır. Yapılandırın ve başlatın.',
+    'log-init': '> APRSPHERE hazır. Yapılandırın ve başlatın.',
     'toast-saved': '✓ KAYDEDİLDİ',
     'toast-started': '▶ BAŞLATILDI',
     'toast-stopped': '⏹ DURDURULDU',
@@ -332,7 +356,7 @@ const STRINGS = {
     'log-running': 'Servis zaten çalışıyor.',
   },
   en: {
-    'lang-btn':    '🌐 TR',
+    'lang-btn': '<span style="font-size: 1.4rem; vertical-align: middle; margin-right: 4px;">🇬🇧</span> EN',
     'hdr-sub':     'PACKET RADIO BEACON // APRS POSITION TRANSMITTER',
     't-station':   '▸ STATION INFO',
     't-callsign':  'Callsign',
@@ -358,7 +382,7 @@ const STRINGS = {
     'status-standby':  'STANDBY',
     'symtable-p': '/ — Primary table',
     'symtable-s': '\\ — Secondary table',
-    'log-init': '> Aprsphere ready. Configure and start.',
+    'log-init': '> APRSPHERE ready. Configure and start.',
     'toast-saved': '✓ SAVED',
     'toast-started': '▶ STARTED',
     'toast-stopped': '⏹ STOPPED',
@@ -374,9 +398,12 @@ function t(key) { return STRINGS[currentLang][key] || key; }
 
 function applyLang() {
   // Update all translatable elements
-  Object.keys(STRINGS.tr).forEach(id => {
+Object.keys(STRINGS.tr).forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.textContent = t(id);
+    if (el) {
+      if (id === 'lang-btn') el.innerHTML = t(id); // textContent yerine innerHTML
+      else el.textContent = t(id);
+    }
   });
   // Symbol table options
   const st = document.getElementById('symbol_table');
@@ -422,72 +449,72 @@ function drawSym(canvas, ch, tbl) {
 
 // [char, label_tr, label_en] — Primary table (/) — tüm 94 sembol ASCII 33-126
 const SYMS_P = [
-  ['!','Polis1','Police1'],['"','Sağlık','Aid Stn'],['#','Digipeat','Digipeat'],
-  ['$','Telefon','Phone'],['%','DX Küme','DX Cluster'],['&','HF Gate','HF Gate'],
-  ["'",'Küçük Uçak','Sm.Aircraft'],['(','Mobilhome','Mobilhome'],['(','Mobilhome','Mobilhome'],
-  [')','TBD','TBD'],['*','Kar Tanesi','Snowflake'],['+','Hastane','Hospital'],
-  [',','Posta','Mail'],['-','Ev','House'],['.','.','dot'],['/','Red Dot','Red Dot'],
-  ['0','Daire','Circle'],['1','1','1'],['2','2','2'],['3','3','3'],['4','4','4'],
+  ['!','Polis','Police'],['"','',''],['#','Digipeat','Digipeat'],
+  ['$','Telefon','Phone'],['%','DX Kümesi','DX Cluster'],['&','HF Geçidi','HF Gateway'],
+  ["'",'Küçük Uçak','S.Aircraft'],['(','M.U.Y. İst.','M.S.G. St.'],
+  [')','Engelli A.','Wheelchair '],['*','Kar Aracı','Snowmobile'],['+','Kızıl Haç','Red Cross'],
+  [',','İzci','Boy Scouts'],['-','Ev','House QTH'],['X','X','dot'],['/','K. Nokta','Red Dot'],
+  ['0','0','Circle'],['1','1','1'],['2','2','2'],['3','3','3'],['4','4','4'],
   ['5','5','5'],['6','6','6'],['7','7','7'],['8','8','8'],['9','9','9'],
   [':','Yangın','Fire'],[';','Çadır','Campground'],['<','Motor','Motorcycle'],
-  ['=','Tren','Railroad'],['>', 'Araba','Car'],['?','Bilgi','Info'],
+  ['=','Tren','Railroad E.'],['>', 'Araba','Car'],['?','Sunucu','Server'],
   ['@','Kasırga','Hurricane'],
-  ['A','Ambulans','Ambulance'],['B','Bisiklet','Bicycle'],['C','Şehir','City'],
-  ['D','D','D'],['E','Patlama','Explosion'],['F','Bekçi','Ranger'],
+  ['A','Yardım İst.','Aid Station'],['B','BBS','BBS'],['C','Kano','Canoe'],
+  ['D','',''],['E','Göz','Eyeball'],['F','Traktör','Farm Veh.'],
   ['G','Grid','Grid'],['H','Otel','Hotel'],['I','TCP/IP','TCP/IP'],
-  ['J','J','J'],['K','Okul','School'],['L','Işık','Beacon'],
-  ['M','Mac','Mac'],['N','NWS','NWS'],['O','Balon','Balloon'],
-  ['P','Polis','Police'],['Q','Q','Q'],['R','Alıcı','Receiver'],
-  ['S','Uzay','Space'],['T','APRS','APRS'],['U','Otobüs','Bus'],
-  ['V','ATV','ATV'],['W','Ulusal Hava','NWS Site'],['X','Helikopter','Helicopter'],
-  ['Y','Yelken','Sailboat'],['Z','Z','Z'],
-  ['[','Yürüyüşçü','Hiker'],['\\','Bisikletçi','Cyclist'],[']','ARES','ARES'],
-  ['^','Büyük Uçak','Lg.Aircraft'],['_','Hava İst.','Wx Station'],['`','Yer Fist.','Dish Ant.'],
-  ['a','Ambulans2','Ambulance2'],['b','Bisiklet2','Bicycle2'],['c','Kablo TV','Cable TV'],
-  ['d','D-Star','D-Star'],['e','Bulut','Cloud'],['f','Savaş Uçağı','Fighter'],
-  ['g','Gridal','Gridal'],['h','Hamfest','Hamfest'],['i','İkon','Icon'],
+  ['J','',''],['K','Okul','School'],['L','PC','PC'],
+  ['M','Mac','Mac'],['N','NTS','NTS'],['O','Balon','Balloon'],
+  ['P','Polis 2','Police 2'],['Q','TBD','TBD'],['R','Alıcı','Receiver'],
+  ['S','Uzay A.','Space S.'],['T','SSTV','SSTV'],['U','Otobüs','Bus'],
+  ['V','Amatör TV','Amateur TV'],['W','U.M. İst.','NWS Site'],['X','Helikopter','Helicopter'],
+  ['Y','Yelken','Yacht'],['Z','Win APRS','Win APRS'],
+  ['[','Yürüyüşçü','Hiker'],['\\','Üçgen (DF)','Triangle DF'],[']','Postane','Post Office'],
+  ['^','Büyük Uçak','L. Aircraft'],['_','Meteo. İst.','Wx Station'],['`','Çanak Ant.','Dish Ant.'],
+  ['a','Ambulans 2','Ambulance 2'],['b','Bisiklet 2','Bicycle 2'],['c','Komuta Mer.','I.C. Post'],
+  ['d','İtfaiye','Fire Dep.'],['e','At','Horse'],['f','İtfaiye Ar.','Fire Truck'],
+  ['g','Planör','Gridal'],['h','Hastane','Hospital'],['i','IOTA','IOTA'],
   ['j','Jeep','Jeep'],['k','Kamyon','Truck'],['l','Laptop','Laptop'],
-  ['m','Mikrofon','Mic-E'],['n','Düğüm','Node'],['o','EOC','EOC'],
-  ['p','Ağıl','Rover'],['q','Grid','Grid'],['r','Anten','Antenna'],
-  ['s','Gemi','Ship'],['t','Fırtına','Tstorm'],['u','Kamyon2','Truck2'],
-  ['v','Van','Van'],['w','Su İst.','WX Site'],['x','Hedef','Target'],
-  ['y','Yagi','Yagi'],['z','Kulüp','Shelter'],
-  ['{','Seli','Fog'],['|','TNC','TNC'],['}','TBD2','TBD2'],['~','Radyo','Radio'],
+  ['m','Mik-E','Mic-E'],['n','Düğüm','Node'],['o','EOC','EOC'],
+  ['p','Köpek','Dog'],['q','Izgara','Grid'],['r','Röle','Repeater'],
+  ['s','Gemi','Ship'],['t','Kamyon D.','Truck Stop'],['u','Tır','Tır'],
+  ['v','Karavan','Van'],['w','Su İst.','Water St.'],['x','X-APRS','X-APRS'],
+  ['y','Yagi','Yagi'],['z','TBD','TBD'],
+  ['{','',''],['|','|','|'],['}','',''],['~','~','~'],
 ];
 
 // Secondary table (\) — tüm 94 sembol
 const SYMS_S = [
-  ['!','Acil','Emergency'],['"','Banka2','Bank2'],['#','Numara','Number'],
-  ['$','Banka','Bank'],['%','Güç','Power'],['&','HF Gate2','HF Gate2'],
-  ["'",'Kriz','Crash'],['(','Deprem','Quake'],['(','Deprem','Quake'],
-  [')','TBD','TBD'],['*','Anten','Antenna'],['+','Kilise','Church'],
-  [',','Sürat Tkm.','Coax'],['-','Ev2','House2'],['.','.','Dot'],['/','Red X','Red X'],
-  ['0','Daire2','Circle2'],['1','1','1'],['2','2','2'],['3','3','3'],['4','4','4'],
-  ['5','5','5'],['6','6','6'],['7','7','7'],['8','8','8'],['9','9','9'],
-  [':','Ateş2','Fire2'],[';','Kamp','Camp'],[' <','Motor2','Motorcycle2'],
-  ['=','Tren2','Train2'],['>','Araç2','Car2'],['?','Info','Info'],
-  ['@','Fırtına','Storm'],
-  ['A','ARES','ARES'],['B','BBS','BBS'],['C','Kamp','Canoe'],
-  ['D','D','D'],['E','Göz','Eyeball'],['F','Araba3','Car3'],
-  ['G','Grid3','Grid3'],['H','Otel2','Hotel2'],['I','IP2','IP2'],
-  ['J','J','J'],['K','Okul2','School2'],['L','L','L'],
-  ['M','MARS','MARS'],['N','NWS2','NWS2'],['O','Balon2','Balloon2'],
-  ['P','Polis2','Police2'],['Q','Q','Q'],['R','Tamir','Repair'],
-  ['S','Uzay2','Space2'],['T','APRS2','APRS2'],['U','Otobüs2','Bus2'],
-  ['V','ATV2','ATV2'],['W','NWS3','NWS3'],['X','X','X'],
-  ['Y','Tekne','Sailboat2'],['Z','Z','Z'],
-  ['[','Walker','Walker'],['\\','Engelli','Disabled'],[']','Wall','Wall'],
-  ['^','Küçük U.','Sm.Plane'],[' _','Gar.Kapı','Gar.Door'],['`','Anten2','Dish2'],
-  ['a','Kuzey G.','N.Gull'],['b','Kesim','Cut'],['c','Kentsel','Urban'],
-  ['d','D-Star2','D-Star2'],['e','Kıvılcım','Sleet'],['f','Araba4','Car4'],
-  ['g','Izgara2','Grid2'],['h','Otel3','Hotel3'],['i','IP3','IP3'],
-  ['j','Jeep2','Jeep2'],['k','Kamyon3','Truck3'],['l','L','L'],
-  ['m','3D Print','3D Print'],['n','Düğüm2','Node2'],['o','EOC2','EOC2'],
-  ['p','Pager','Pager'],['q','Q','Q'],['r','Robot','Robot'],
-  ['s','Uzay G.','Space Stn'],['t','Tufan','Tornado'],['u','Kamyon4','Truck4'],
-  ['v','Van2','Van2'],['w','Hava2','Wx Site2'],['x','X-Ray','X-Ray'],
-  ['y','Yagi2','Yagi2'],['z','Barınak','Shelter'],
-  ['{','Sis2','Fog2'],['|','TNC2','TNC2'],['}','TBD3','TBD3'],['~','Radyo2','Radio2'],
+  ['!','Acil','Emergency'],['"','',''],['#','Digi','Digi'],
+  ['$','Banka','Bank'],['%','Trafo','Power Plant'],['&','IGate','Igate'],
+  ["'",'Kaza','Crash'],['(','Bulutlu','Cloudy'],
+  [')','Yangın G. Y.','Firenet Meo.'],['*','Kar','Snow'],['+','Kilise','Church'],
+  [',','Kadın İzci','Girl Scouts'],['-','HF Ev','HF House'],['.','?','?'],['/','Yol Noktası','Waypoint'],
+  ['0','Daire','Circle'],['1','1','1'],['2','2','2'],['3','3','3'],['4','4','4'],
+  ['5','5','5'],['6','6','6'],['7','7','7'],['8','Ağ Düğümü','Network Node'],['9','Benzinlik','Gas Station'],
+  [':','Dolu','Hail'],[';','Park','Park'],[' <','WX Bayrağı','WX Flag'],
+  ['=','DTMF K.','DTMF Us.'],['>','Araçlar','Vehicles'],['?','Bilgi','Info'],
+  ['@','Kasırga','Hurricane'],
+  ['A','Kutu','Box'],['B','Tipi','Blowing Snow'],['C','Sahil Güv.','Coast Gua.'],
+  ['D','Çiseleme','Drizzle'],['E','Duman','Smoke'],['F','Dolu','Frz. Rain'],
+  ['G','Kar Yağışı','Snow Shower'],['H','Sis','Haze'],['I','Yağmur Y.','Rain Shower'],
+  ['J','Yıldırım','Lightning'],['K','Kenwood HT','Kenwood HT'],['L','Deniz Feneri','Lighthouse'],
+  ['M','MARS','MARS'],['N','Şamandıra','Nav. Buoy'],['O','Roket','Rocket'],
+  ['P','Park Yeri','Parking'],['Q','Deprem','Earthquake'],['R','Restoran','Restaurant'],
+  ['S','Uydu','Satellite'],['T','Fırtına','Thunderstorm'],['U','Güneşli','Sunny'],
+  ['V','VOR','VORTAC'],['W','NWS Alanı','NWS Site'],['X','Eczane RX','Pharmacy RX'],
+  ['Y','Radyo Ekp.','Radio & Dev.'],['Z','',''],
+  ['[','Duvar Bulutu','Wall Cloud'],['\\','',''],[']','',''],
+  ['^','Uçak.','Aircraft'],[' _','M. İst. Digi','WX St. Digi'],['`','Yağmur','Rain'],
+  ['a','LoRa vb.','LoRa etc.'],['b','Kum Fırt.','Blowing Dust'],['c','CD Üçgeni','CD Triangle'],
+  ['d','DX Noktası','DX Spot'],['e','Sulu Kar','Sleet'],['f','Hortum','Funnel Cloud'],
+  ['g','Fırtına B.','Gale Flags'],['h','Mağaza','Store'],['i','Siyah Kutu','Black Box'],
+  ['j','İş Sahası','Work Zone'],['k','SUV','SUV'],['l','Bölge Sim.','Area Symbols'],
+  ['m','Değer Sim.','Value Sign'],['n','Üçgen','Triangle'],['o','Küçük Daire','Small Circle'],
+  ['p','Par. Bulutlu','Partly Cloudy'],['q','',''],['r','Tuvalet','Restrooms'],
+  ['s','Gemi.','Ship'],['t','Kasırga','Tornado'],['u','Kamyon 2','Truck 2'],
+  ['v','Karavan 2','Van 2'],['w','Sel','Flooding'],['x','Engel','Obstruction'],
+  ['y','Gök. Uyarı','Skywarn'],['z','Barınak','Ov. Shelter'],
+  ['{','Sis 2','Fog 2'],['|','|','|'],['}','',''],['~','~','~'],
 ];
 
 function rebuildSymGrid() {
