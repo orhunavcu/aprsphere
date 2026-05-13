@@ -94,7 +94,9 @@ All settings are saved via the web UI. You can also pass environment variables d
 | `INTERVAL` | `900` | Transmit interval in seconds (60–3600) |
 
 ---
+## APRSPHERE UI
 
+![Aprsphere UI](docs/screenshot.png)
 ## License
 
 MIT © [Orhun AVCU — TA4VCU](https://github.com/orhunavcu)
