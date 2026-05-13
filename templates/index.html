@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>APRSPHERE</title>
+<link rel="icon" type="image/png" href="/static/icon.png?v=1">
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
@@ -20,6 +21,7 @@
     --text:       #d4e8d4;
     --label:      #8ab88a;
     --muted:      #4a5a4a;
+    --footer-glow:#00f2ff;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -38,13 +40,13 @@
   }
   .logo-wrap {
     flex-shrink: 0; width: 64px; height: 64px; border-radius: 14px; overflow: hidden;
-    box-shadow: 0 0 12px #00ff4166, 0 0 28px #00ff4133, 0 0 50px #00ff411a;
+    box-shadow: 0 0 12px #00ff4166;
     animation: logopulse 3s ease-in-out infinite;
   }
   .logo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
   @keyframes logopulse {
-    0%,100% { box-shadow: 0 0 12px #00ff4166, 0 0 28px #00ff4133, 0 0 50px #00ff411a; }
-    50%      { box-shadow: 0 0 20px #00ff41aa, 0 0 45px #00ff4155, 0 0 80px #00ff4133; }
+    0%,100% { box-shadow: 0 0 12px #00ff4166; }
+    50%      { box-shadow: 0 0 20px #00ff41aa; }
   }
   .title-block { display: flex; flex-direction: column; gap: 6px; }
   .title-block h1 {
@@ -55,18 +57,13 @@
   #lang-btn {
     position: absolute; right: 0; top: 50%; transform: translateY(-50%);
     font-family: 'Orbitron', sans-serif; 
-    font-size: 0.75rem; /* Genel metin boyutu */
+    font-size: 0.75rem; 
     letter-spacing: 2px;
     padding: 0.45rem 1rem; border: 1px solid var(--green-dim); color: var(--green-dim);
     background: transparent; cursor: pointer; transition: all 0.2s;
-    display: flex; align-items: center; gap: 8px; /* Emoji ve metin arası boşluk */
+    display: flex; align-items: center; gap: 8px; 
   }
-
-
-  #lang-btn::first-letter {
-    font-size: 1.3rem; 
-    vertical-align: middle;
-  }
+  #lang-btn::first-letter { font-size: 1.3rem; vertical-align: middle; }
   #lang-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-glow); }
 
   /* STATUS */
@@ -138,7 +135,7 @@
 
   /* BUTTONS */
   .btn-row { display:flex; gap:1rem; width:100%; max-width:860px; }
-  .btn { font-family:'Orbitron',sans-serif; font-size:0.85rem; letter-spacing:2px; padding:0.9rem 2rem; border:2px solid; cursor:pointer; transition:all 0.2s; text-transform:uppercase; flex:1; display:flex; align-items:center; justify-content:center; gap:8px; }
+  .btn { font-family:'Orbitron',sans-serif; font-size:0.85rem; letter-spacing:2px; padding:0.9rem 2rem; border:2px solid; cursor:pointer; transition:all 0.2s; text-transform:uppercase; flex:1; display:flex; align-items:center; justify-content:center; gap:8px; border-radius:0; }
   .btn-save { background:transparent; border-color:var(--green-dim); color:var(--green-dim); }
   .btn-save:hover { background:var(--green-glow); border-color:var(--green); color:var(--green); box-shadow:0 0 16px var(--green-glow); }
   .btn-start { background:var(--green-glow); border-color:var(--green); color:var(--green); box-shadow:0 0 12px var(--green-glow); }
@@ -153,18 +150,14 @@
   .log-ok{color:var(--green);} .log-err{color:var(--red);} .log-inf{color:var(--amber);}
   #toast { position:fixed; bottom:2rem; right:2rem; background:var(--panel); border:1px solid var(--green); color:var(--green); font-family:'Share Tech Mono',monospace; font-size:0.82rem; padding:0.75rem 1.5rem; box-shadow:0 0 20px var(--green-glow); opacity:0; transform:translateY(10px); transition:all 0.3s; pointer-events:none; z-index:9999; }
   #toast.show { opacity:1; transform:translateY(0); }
-  footer { color:#6a8a6a; font-size:0.72rem; letter-spacing:2px; margin-top:1.5rem; padding-bottom:1rem; text-align:center; }
-  @media(max-width:600px){ .grid-2,.grid-3{grid-template-columns:1fr;} .sym-row{grid-template-columns:1fr;} .symbol-grid{grid-template-columns:repeat(6,1fr);} }
-
-  /* DONATE */
+  
+  /* DONATE & FOOTER */
   .donate-wrap{width:100%;max-width:860px;display:flex;justify-content:center;margin-top:1rem;margin-bottom:0.5rem;}
   .btn-donate{font-family:'Orbitron',sans-serif;font-size:0.75rem;letter-spacing:2px;padding:0.6rem 2rem;border:1px solid #0070ba;background:transparent;color:#0070ba;text-decoration:none;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:10px;border-radius:0;width:100%;}
   .btn-donate:hover{background:rgba(0,112,186,0.1);border-color:#009cde;color:#009cde;box-shadow:0 0 12px rgba(0,112,186,0.2);}
   .btn-donate svg{fill:currentColor;width:16px;height:16px;}
-
-  /*FOOTER */
-  footer { color:#ffb300; font-size:0.72rem; letter-spacing:2px; margin-top:1.5rem; padding-bottom:1rem; text-align:center; opacity:0.8; text-shadow:0 0 5px rgba(0,242,255,0.2); }
-
+  footer { color:var(--footer-glow); font-size:0.72rem; letter-spacing:2px; margin-top:1.5rem; padding-bottom:1rem; text-align:center; opacity:0.8; text-shadow:0 0 5px rgba(0,242,255,0.2); }
+  @media(max-width:600px){ .grid-2,.grid-3{grid-template-columns:1fr;} .sym-row{grid-template-columns:1fr;} .symbol-grid{grid-template-columns:repeat(6,1fr);} }
 </style>
 </head>
 <body>
@@ -183,7 +176,6 @@
   <span id="pid-text" style="color:var(--muted);font-size:0.78rem;"></span>
 </div>
 
-<!-- STATION -->
 <div class="panel">
   <div class="section-title" id="t-station">▸ İSTASYON BİLGİLERİ</div>
   <div class="grid-3">
@@ -216,7 +208,6 @@
   </div>
 </div>
 
-<!-- LOCATION -->
 <div class="panel">
   <div class="section-title" id="t-location">▸ KONUM</div>
   <div class="grid-2">
@@ -239,7 +230,6 @@
   </div>
 </div>
 
-<!-- SYMBOL -->
 <div class="panel">
   <div class="section-title" id="t-symbol">▸ SEMBOL</div>
   <div class="sym-row">
@@ -265,7 +255,6 @@
   </div>
 </div>
 
-<!-- COMMENT & INTERVAL -->
 <div class="panel">
   <div class="section-title" id="t-timing">▸ YORUM VE ZAMANLAMA</div>
   <div class="field" style="margin-bottom:1.5rem;">
@@ -292,10 +281,9 @@
   </div>
 </div>
 
-<!-- LOG -->
 <div class="panel">
   <div class="section-title" id="t-terminal">▸ TERMINAL</div>
-  <div id="log-box"><span class="log-inf log-line" id="init-log">&gt; APRSPHERE hazır. Yapılandırın ve başlatın.</span></div>
+  <div id="log-box"></div>
 </div>
 
 <div class="btn-row">
@@ -303,6 +291,7 @@
   <button class="btn btn-start" id="btn-start" onclick="startService()"><span>▶</span><span id="t-start">BAŞLAT</span></button>
   <button class="btn btn-stop" id="btn-stop" onclick="stopService()" style="display:none"><span>⏹</span><span id="t-stop">DURDUR</span></button>
 </div>
+
 <div class="donate-wrap">
   <a href="https://www.paypal.com/donate/?hosted_button_id=8QN5GXRJR7G8W" target="_blank" class="btn-donate">
     <svg viewBox="0 0 24 24"><path d="M20.067 8.478c.492.88.556 2.014.307 3.327-.278 1.458-.923 2.591-1.933 3.398-1.01.808-2.358 1.212-4.043 1.212h-1.604c-.378 0-.693.26-.763.63l-.744 3.974c-.035.187-.2.321-.39.321H7.81c-.244 0-.422-.224-.378-.464l2.544-13.6c.035-.187.2-.321.39-.321h4.945c1.685 0 2.915.347 3.69 1.042.775.694 1.13 1.523 1.066 2.481zM14.73 11.238c0-.23-.053-.418-.16-.563-.106-.145-.29-.217-.551-.217h-1.428l-.45 2.4h1.092c.504 0 .866-.141 1.086-.423.22-.282.31-.683.31-1.201z"/></svg>
@@ -315,7 +304,7 @@
 
 <script>
 // ── LANGUAGE ──
-let currentLang = 'tr';
+let currentLang = localStorage.getItem('lang') || 'tr';
 
 const STRINGS = {
   tr: {
@@ -341,11 +330,12 @@ const STRINGS = {
     't-save':  'KAYDET',
     't-start': 'BAŞLAT',
     't-stop':  'DURDUR',
+    't-donate': 'PAYPAL İLE BAĞIŞ YAP',
     'status-running':  'SERVİS ÇALIŞIYOR',
     'status-standby':  'STANDBY',
     'symtable-p': '/ — Birincil tablo',
     'symtable-s': '\\ — İkincil tablo',
-    'log-init': '> APRSPHERE hazır. Yapılandırın ve başlatın.',
+    'log-init': 'APRSPHERE hazır. Yapılandırın ve başlatın.',
     'toast-saved': '✓ KAYDEDİLDİ',
     'toast-started': '▶ BAŞLATILDI',
     'toast-stopped': '⏹ DURDURULDU',
@@ -378,11 +368,12 @@ const STRINGS = {
     't-save':  'SAVE',
     't-start': 'START',
     't-stop':  'STOP',
+    't-donate': 'DONATE WITH PAYPAL',
     'status-running':  'SERVICE RUNNING',
     'status-standby':  'STANDBY',
     'symtable-p': '/ — Primary table',
     'symtable-s': '\\ — Secondary table',
-    'log-init': '> APRSPHERE ready. Configure and start.',
+    'log-init': 'APRSPHERE ready. Configure and start.',
     'toast-saved': '✓ SAVED',
     'toast-started': '▶ STARTED',
     'toast-stopped': '⏹ STOPPED',
@@ -397,38 +388,44 @@ const STRINGS = {
 function t(key) { return STRINGS[currentLang][key] || key; }
 
 function applyLang() {
-  // Update all translatable elements
-Object.keys(STRINGS.tr).forEach(id => {
+  Object.keys(STRINGS.tr).forEach(id => {
     const el = document.getElementById(id);
     if (el) {
-      if (id === 'lang-btn') el.innerHTML = t(id); // textContent yerine innerHTML
+      if (id === 'lang-btn') el.innerHTML = t(id);
       else el.textContent = t(id);
     }
   });
-  // Symbol table options
+
   const st = document.getElementById('symbol_table');
   if (st) {
     st.options[0].text = t('symtable-p');
     st.options[1].text = t('symtable-s');
   }
-  // Status text
-  const running = document.getElementById('dot').classList.contains('active');
-  document.getElementById('status-text').textContent = running ? t('status-running') : t('status-standby');
-  // Slider
+
+  const dot = document.getElementById('dot');
+  if(dot) {
+      const running = dot.classList.contains('active');
+      document.getElementById('status-text').textContent = running ? t('status-running') : t('status-standby');
+  }
+
   updateSlider();
-  // Sym grid labels
   rebuildSymGrid();
+  
+  // Terminal logunu dile göre güncelle
+  const logBox = document.getElementById('log-box');
+  if(logBox) {
+     logBox.innerHTML = '';
+     log(t('log-init'), 'inf');
+  }
 }
 
 function toggleLang() {
   currentLang = currentLang === 'tr' ? 'en' : 'tr';
+  localStorage.setItem('lang', currentLang);
   applyLang();
 }
 
 // ── APRS SYMBOLS ──
-// Source: https://github.com/hessu/aprs-symbols
-// Sprites served from /static/ (copied into Docker image)
-// Layout: ASCII 33('!') = index 0, 16 cols per row, 24x24px per cell
 const imgP = new Image(); imgP.src = '/static/aprs-symbols-24-0.png';
 const imgS = new Image(); imgS.src = '/static/aprs-symbols-24-1.png';
 
@@ -447,7 +444,6 @@ function drawSym(canvas, ch, tbl) {
   else img.addEventListener('load', draw, {once: true});
 }
 
-// [char, label_tr, label_en] — Primary table (/) — tüm 94 sembol ASCII 33-126
 const SYMS_P = [
   ['!','Polis','Police'],['"','',''],['#','Digipeat','Digipeat'],
   ['$','Telefon','Phone'],['%','DX Kümesi','DX Cluster'],['&','HF Geçidi','HF Gateway'],
@@ -482,7 +478,6 @@ const SYMS_P = [
   ['{','',''],['|','|','|'],['}','',''],['~','~','~'],
 ];
 
-// Secondary table (\) — tüm 94 sembol
 const SYMS_S = [
   ['!','Acil','Emergency'],['"','',''],['#','Digi','Digi'],
   ['$','Banka','Bank'],['%','Trafo','Power Plant'],['&','IGate','Igate'],
@@ -522,6 +517,7 @@ function rebuildSymGrid() {
   const tbl  = document.getElementById('symbol_table').value;
   const syms = tbl === '/' ? SYMS_P : SYMS_S;
   const cur  = document.getElementById('symbol').value || '-';
+  if(!grid) return;
   grid.innerHTML = '';
   syms.forEach(([ch, lbTR, lbEN]) => {
     const lbl = currentLang === 'en' ? lbEN : lbTR;
@@ -557,6 +553,7 @@ imgS.addEventListener('load', () => {
 const sliderEl = document.getElementById('interval');
 const sliderFill = document.getElementById('slider-fill');
 function updateSlider() {
+  if(!sliderEl || !sliderFill) return;
   const min=+sliderEl.min, max=+sliderEl.max, val=+sliderEl.value;
   sliderFill.style.width = ((val-min)/(max-min)*100) + '%';
   const m = Math.floor(val/60), s = val%60;
@@ -568,7 +565,7 @@ function updateSlider() {
   }
   document.getElementById('interval-label').textContent = lbl;
 }
-sliderEl.addEventListener('input', updateSlider);
+if(sliderEl) sliderEl.addEventListener('input', updateSlider);
 
 // ── MAP ──
 let map=null, marker=null;
@@ -592,13 +589,17 @@ document.getElementById('lon').addEventListener('input', updateMap);
 
 // ── HELPERS ──
 function log(msg, type='') {
-  const b=document.getElementById('log-box'), l=document.createElement('div');
+  const b=document.getElementById('log-box');
+  if(!b) return;
+  const l=document.createElement('div');
   l.className='log-line'+(type?' log-'+type:'');
-  l.textContent='['+new Date().toLocaleTimeString()+'] '+msg;
+  l.textContent='> '+msg;
   b.appendChild(l); b.scrollTop=b.scrollHeight;
 }
 function toast(msg) {
-  const e=document.getElementById('toast'); e.textContent=msg; e.classList.add('show');
+  const e=document.getElementById('toast'); 
+  if(!e) return;
+  e.textContent=msg; e.classList.add('show');
   setTimeout(()=>e.classList.remove('show'),2500);
 }
 function getFormData() {
@@ -665,11 +666,12 @@ async function checkStatus() {
 }
 
 // Init
-rebuildSymGrid();
-updateSlider();
-fetch('/api/config').then(r=>r.json()).then(fillForm);
-checkStatus();
-setInterval(checkStatus,5000);
+document.addEventListener('DOMContentLoaded', () => {
+    applyLang();
+    fetch('/api/config').then(r=>r.json()).then(fillForm).catch(e => console.log('Config load skip (no server)'));
+    checkStatus();
+    setInterval(checkStatus,5000);
+});
 </script>
 </body>
 </html>
