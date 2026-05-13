@@ -7,6 +7,7 @@
   [![Build & Push to GHCR](https://github.com/orhunavcu/aprsphere/actions/workflows/docker.yml/badge.svg)](https://github.com/orhunavcu/aprsphere/actions/workflows/docker.yml)
   ![Image](https://img.shields.io/badge/ghcr.io-orhunavcu%2Faprsphere-00a829?logo=docker&logoColor=white)
   ![Python](https://img.shields.io/badge/Python-3.11-3776ab?logo=python&logoColor=white)
+  [![Donate](https://img.shields.io/badge/Donate-PayPal-00457C?style=flat&logo=paypal&logoColor=white)](https://www.paypal.com/donate/?hosted_button_id=8QN5GXRJR7G8W)
   ![License](https://img.shields.io/badge/License-MIT-brightgreen)
 </div>
 
@@ -14,7 +15,7 @@
 
 ## About
 
-**Aprsphere** is a lightweight, self-hosted APRS static position beacon with a browser-based configuration panel. Configure your callsign, coordinates, symbol, comment, server, and beacon interval — all from a dark-themed web UI with live map preview. No config files to edit manually.
+**APRSPHERE** is a lightweight, self hosted APRS static position beacon with a browser-based configuration panel. Configure your callsign, coordinates, symbol, comment, server, and beacon interval all from a dark-themed web UI with live map preview. No config files to edit manually.
 
 ---
 
@@ -22,7 +23,7 @@
 
 - 🌐 **Web UI** on port `3169` — configure and control everything from your browser
 - 🗺️ **Live map preview** — dark-themed OpenStreetMap with grid overlay
-- 🇹🇷 **Turkey APRS server** — `turkiye.aprs2.net` as the primary server
+- 🇹🇷 **Turkey APRS server** — `turkiye.aprs2.net` as the primary server but you can choose any other different one.
 - 🔣 **Symbol picker** — quick-select palette for common APRS symbols
 - ⏱️ **Interval slider** — 1 minute to 1 hour
 - 🐳 **Docker-first** — single `docker compose up` to run anywhere
